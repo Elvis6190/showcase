@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Dashboard Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1d1d1d;
+      }
+      .login-container {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: white;
+      }
+      h2 {
+        color: #333;
+      }
+      input {
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 10px;
+        width: 100%;
+        background-color: #ff5722;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #ff9878;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Staff Dashboard Login</h2>
+      <input type="text" id="loginId" placeholder="Login ID" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button onclick="checkLogin()">Login</button>
+      <p id="error" style="color: red"></p>
+    </div>
+
+    <script>
+      function checkLogin() {
+        const loginId = document.getElementById("loginId").value;
+        const password = document.getElementById("password").value;
+
+        if (loginId === "Game Staff" && password === "123456") {
+          window.location.href = "/staff/introduction.html"; // Redirect to Game Staff page
+        } else if (loginId === "Internal Affairs" && password === "098765") {
+          window.location.href = "/"; // Redirect to Internal Affairs page
+        } else if (loginId === "Management" && password === "234567") {
+          window.location.href = "/"; // Redirect to Management page
+        } else {
+          document.getElementById("error").innerText =
+            "Invalid Login ID or Password.";
+        }
+      }
+    </script>
+  </body>
+</html>

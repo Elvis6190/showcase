@@ -1,3 +1,10 @@
-Website: erlc.washington-dc-roleplay.run.place
-DNS Panel: freedomain.one
+Website: https://erlc.washington-dc-roleplay.run.place
+DNS Panel: https://freedomain.one
+
+Website: https://washington-dc-roleplay.gamer.gd
+DNS Panel: https://infinityfree.com/
+
 Prettier Text: Command+S
+
+Reminder:
+    - Must include index.html (or else it will appear 404)

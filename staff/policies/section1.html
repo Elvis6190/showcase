@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction - Staff Dashboard</title>
+    <title>Policies Section 1 - Staff Dashboard</title>
     <style>
       body {
         margin: 0;
@@ -272,8 +272,9 @@
         text-align: left;
         align-items: center;
         justify-content: left;
-        margin-top: 20px;
+        margin-top: 30px;
         color: white;
+        font-size: 16px;
       }
       .body-line {
         width: calc(100vw - 100px);
@@ -283,6 +284,7 @@
         border-radius: 20px;
         margin-right: 50px;
         margin-left: 50px;
+        margin-top: -10px;
       }
       .body {
         color: white;
@@ -306,30 +308,66 @@
         color: white;
         font-size: 10px;
       }
-      .servername {
+	.pointscontainer {
+    	margin-left: 65px; /* Keep the left margin */
+    	margin-right: 0px; /* Adjust the right margin */
+    	max-width: 100vh; /* Allow for margins */
+    	height: 100vw; /* Allow height to adjust */
+    	text-align: left;
+    	display: left; /* Use flexbox */
+    	flex-wrap: wrap; /* Allow wrapping */
+    	align-items: left; /* Align items to the start */
+    	justify-content: left; /* Align items to the left */
+    	color: white;
+    	overflow: hidden; /* Prevent horizontal scrolling */
+        margin-top: -15px;
+	}
+
+	.firstPoint {
+    	font-family: monospace;
+    	font-size: 15px;
+    	color: #ff5722;
+    	margin-right: 50px; /* Optional: Space between items */
+    	white-space: normal; /* Allow text to wrap */
+    	display: block; /* Ensure it behaves like a block element */
+	}      
+    .addPoint1 {
+    	font-family: monospace;
+    	font-size: 15px;
+    	color: #ff5722;
+    	margin-right: 50px; /* Optional: Space between items */
+    	white-space: normal; /* Allow text to wrap */
+    	display: block; /* Ensure it behaves like a block element */
+    	
+    }
+	.addPoint2 {
+        margin-left: 10px;
         font-family: monospace;
         font-size: 15px;
-        color: #ff5722;
+        color: #673ab7;
+        margin-right: 50px;
+        white-space: normal;
+        display: block;
       }
     </style>
 
     <!-- Banner -->
     <img src="/assets/staff-dashboard.png" class="banner" />
     <!-- Title -->
-    <h1 class="title" ;>📖 Introduction</h1>
+    <h1 class="title" ;>Section I: General Policies & Professional Conduct</h1>
     <!-- Line -->
     <hr class="body-line" />
     <!-- Body -->
-    <p class="body">
-      Welcome to
-      <tt class="servername">Washington D.C. Roleplay Staff Team</tt>. This
-      handbook contains all essential policies and procedures required for your
-      role. As a staff member, you are expected to maintain a high standard of
-      professionalism and maturity at all times. Adherence to these guidelines
-      is mandatory for all ranks unless a written exemption is provided by a
-      Leadership member. Failure to comply with these policies will result in
-      disciplinary action.
-    </p>
+    <p class="body"><b>1.1 Chain of Command</b></p>
+    <div class="pointscontainer">
+      <pre class="firstPoint">
+        1.1.1  The server operates on a strict chain of command. You must follow it at all times for questions, issues, and escalations.
+      </pre>
+      <pre class="firstPoint">
+        1.1.2  Failure to follow the chain of command may result in an infraction.
+      </pre>
+    </div>
+
     <!-- 6 Lines -->
     <br /><br /><br /><br /><br /><br />
     <!-- Footer -->
