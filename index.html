@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertical Navigation Bar with Arrow Dropdown</title>
+    <style>
+          body {
+              margin: 0;
+              padding: 0;
+              font-family: Arial, sans-serif;
+              background-color: #1d1d1d;
+          }
+          .navbar {
+              width: 250px; /* Bar Width */
+              background-color: #1d1d1d;
+              height: 100vh; /* Full height */
+              position: fixed; /* Fixed sidebar */
+              transform: translateX(0); /* Show by default */
+              transition: transform 0.3s ease; /* Smooth transition */
+              border-right: 2px solid white; /* Shorthand: width, style, color */
+              margin-top: 0px;
+          }
+          .navbar.hidden {
+              transform: translateX(-100%); /* Hide the navbar */
+          }
+          .navbar a {
+              display: block;
+              color: white;
+              text-align: left;
+              padding: 14px 18px; /* Navbar Text Size */
+              text-decoration: none;
+              font-size: 16px; /* Same font size for all links */
+          }
+          .navbar a:hover {
+              background-color: #111111;
+          }
+          .dropdown {
+              position: relative;
+          }
+          .dropdown-content {
+              display: none;
+              position: relative;
+              background-color: #f9f9f9;
+          }
+          .dropdown-content a {
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+          }
+          .dropdown-content a:hover {
+              background-color: #f1f1f1;
+          }
+          /* Show dropdown when checkbox is checked */
+          .dropdown input[type="checkbox"]:checked ~ .dropdown-content {
+              display: block; /* Show on checkbox checked */
+          }
+          .toggle-btn {
+              cursor: pointer;
+              padding: 14px 18px; /* Navbar Button Size */
+              background-color: #1d1d1d;
+              color: white;
+              border: none;
+              text-align: left;
+              width: calc(100% - 36px); /* Adjust width for arrow */
+              display: inline-flex;
+              align-items: center; /* Align text and arrow */
+              font-size: 16px; /* Same font size for Home button */
+          }
+          .toggle-btn:hover {
+              background-color: #111111;
+          }
+          .arrow {
+              margin-left: 20px;
+              width: 25px; /* Adjust size */
+              height: 25px; /* Adjust size */
+              background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="white"/></svg>') no-repeat;
+              transition: transform 0.38s ease; /* Transition for rotation */
+          }
+          /* Rotate arrow when checkbox is checked */
+          .dropdown input[type="checkbox"]:checked + .toggle-btn .arrow {
+              transform: rotate(180deg); /* Flip the arrow when dropdown is open */
+          }
+          /* Completely hide the checkbox */
+          .dropdown input[type="checkbox"] {
+              display: none; /* Hide the checkbox */
+          }
+          .navbar-server-name {
+              color: #ffffff;
+              font-size: 14px;
+              text-align: left;
+              margin-top: 35px;
+              margin-left: 5px;
+          }
+          .navbar-server-logo {
+              width: 40px;
+              height: 40px;
+              text-align: center;
+              margin-top: 13px;
+              margin-left: 10px;
+          }
+          .navbar-server-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 15px;
+              margin-top: -20px;
+          }
+      .author-server-logo {
+          width: 30px;
+          height: 30px;
+          /* Removed invalid margin-left */
+      }
+          .author-server-container {
+              display: flex;
+              margin-left: none;
+              margin-right: auto;
+              border: none;
+              width: 1000px;
+              height: 40px;
+              text-align: left;
+              align-items: center;
+              justify-content: left;
+              margin-top: 70px;
+          }
+          .author-server-name {
+              color: #ffffff;
+              font-size: 14px;
+              text-align: left;
+              margin-left: 5px;
+          }
+          .main-content {
+          	color: #1f1f1f;
+              flex-grow: 1; /* Allow main content to grow and take available space */
+              display: flex; /* Flexbox for centering */
+              align-items: center; /* Center vertically */
+              justify-content: center; /* Center horizontally */
+              margin-right: 50px; /* Initial space for navigation */
+              margin-left: 50px; /* Initial space for navigation */
+          }
+          .navbar-toggle-btn {
+              /* consolidated styles */
+              cursor: pointer;
+              padding: 15px 5px;
+              background-color: #1d1d1d;
+              color: white;
+              border-right: 2px solid white;
+              border-bottom: 2px solid white;
+              position: fixed;
+              left: 250px;
+              top: 0;
+              transition: transform 0.3s ease;
+              z-index: 1000;
+              width: 40px;
+              height: 20px;
+          }
+          .navbar-toggle-btn:hover {
+              background-color: #111111;
+          }
+          input[type="checkbox"]:checked ~ .navbar {
+              transform: translateX(-100%); /* Move navbar off-screen to the left */
+          }
+          input[type="checkbox"]:checked ~ .main-content {
+              transform: translateX(0); /* Move toggle button off-screen to the right */
+          }
+          input[type="checkbox"]:checked ~ .navbar-toggle-btn {
+              transform: translateX(-250px); /* Move toggle button off-screen to the right */
+          }
+          .hamburger {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-around;
+              width: 50px; /* Width of the hamburger */
+              height: 25px; /* Height of the hamburger */
+              margin-top: none;
+          }
+          .line {
+              height: 2px; /* Height of each line */
+              background-color: white; /* Line color */
+              border-radius: 5px; /* Rounded edges */
+              transition: all 0.3s ease; /* Smooth transition */
+              margin-left: 5px;
+              width: 30px;
+              margin-top: -3px
+          }
+    </style>
+  </head>
+  <body>
+    <!-- Toggle Button -->
+    <input type="checkbox" id="toggle-navbar" style="display: none;" />
+    <label class="navbar-toggle-btn" for="toggle-navbar">
+      <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </label>
+
+    <!-- Navigation Bar Start -->
+    <div class="navbar">
+      <!-- Contents -->
+      <div class="navbar-server-container">
+        <img
+          class="navbar-server-logo"
+          src="/assets/logo.png"
+          alt="Washington D.C. Roleplay Server Logo"
+        />
+        <h4 class="navbar-server-name">
+          Washington D.C. Roleplay Staff Handbook
+        </h4>
+      </div>
+      <a href="#"><b>Introduction</b></a>
+      <div class="dropdown">
+        <input type="checkbox" id="dropdown-toggle" />
+        <label class="toggle-btn" for="dropdown-toggle"
+          ><b>Staff Guidelines</b><span class="arrow"></span
+        ></label>
+        <div class="dropdown-content">
+          <a href="#">Section I: General Policies & Professional Conduct</a>
+          <a href="#">Section II: In-Game Policies</a>
+          <a href="#">Section III: Discord Policies</a>
+        </div>
+      </div>
+      <a href="#"><b>STS Guidelines</b></a>
+      <a href="#"><b>Official Messages</b></a>
+      <a href="#"><b>Moderation Guide</b></a>
+    </div>
+
+    <!-- Navigation Bar End -->
+
+    <!-- Main Content -->
+    <!-- Author -->
+    <div class="main-content">
+      <div class="author-server-container">
+        <img
+          class="author-server-logo"
+          src="/assets/logo.png"
+          alt="Washington D.C. Roleplay Server Logo"
+        />
+        <h6 class="author-server-name">
+          Washington D.C. Roleplay Staff Handbook
+        </h6>
+      </div>
+    </div>
+
+    <style>
+      .title {
+         	margin-left: 50px;
+             margin-right: auto;
+             width: auto;
+             height: 40px;
+             text-align: left;
+             align-items: center;
+             justify-content: left;
+             margin-top: 20px;
+             color: white;
+         }
+         .body-line {
+         	width: calc(100vw - 100px);
+             height: 0.1 px;
+             color: white;
+             background-color: white;
+             border-radius: 20px;
+             margin-right: 50px;
+             margin-left: 50px;
+         }
+         .body {
+         	color: white;
+             margin-top: 25px;
+             margin-right: 50px;
+             margin-left: 50px;
+             font-size: 17px;
+             margin-right: 50px;
+      	text-align: left;
+             align-items: center;
+             justify-content: center;
+
+         }
+         .footer{
+         	margin-left: 50px;
+             margin-right: 50px;
+             width: auto;
+             height: 40px;
+             text-align: center;
+             align-items: center;
+             justify-content: center;
+             color: white;
+             font-size: 10px;
+         }
+         .servername {
+             font-family: monospace;
+         	font-size: 15px;
+             color: #FF5722;
+         }
+    </style>
+
+    <!-- Title -->
+    <h1 class="title" ;>Introduction</h1>
+    <!-- Line -->
+    <hr class="body-line" />
+    <!-- Body -->
+    <p class="body">
+      Welcome to
+      <tt class="servername">Washington D.C. Roleplay Staff Team</tt>. This
+      handbook contains all essential policies and procedures required for your
+      role. As a staff member, you are expected to maintain a high standard of
+      professionalism and maturity at all times. Adherence to these guidelines
+      is mandatory for all ranks unless a written exemption is provided by a
+      Leadership member. Failure to comply with these policies will result in
+      disciplinary action.
+    </p>
+    <!-- 6 Lines -->
+    <br /><br /><br /><br /><br /><br />
+    <!-- Footer -->
+    <footer class="footer">
+      © 2025 Washington D.C. Roleplay - All Rights Reserved.
+    </footer>
+    <!-- Main Content End -->
+
+    <!-- Login Page Advance Start -->
+    <!--<script>
+    if (!sessionStorage.getItem('loggedIn')) {
+        window.location.href = 'login.html'; // Redirect to login page if not logged in
+    }
+
+    // Optional: Uncomment if you want to clear login status on refresh
+    // window.onbeforeunload = function() {
+    //     sessionStorage.removeItem('loggedIn'); // Clear login status on refresh
+    // };
+</script>-->
+    <!-- Login Page Advance End -->
+  </body>
+</html>
