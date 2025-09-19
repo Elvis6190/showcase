@@ -53,16 +53,20 @@
     </div>
 
     <script>
+      
       function checkLogin() {
         const loginId = document.getElementById("loginId").value;
         const password = document.getElementById("password").value;
-
+        
         if (loginId === "Game Staff" && password === "123456") {
-          window.location.href = "staff/introduction.html"; // Redirect to Game Staff page
+          sessionStorage.setItem("loggedIn", true); // Set the login status
+          window.location.href = "staff/introduction.html";
         } else if (loginId === "Internal Affairs" && password === "098765") {
-          window.location.href = "/"; // Redirect to Internal Affairs page
+          sessionStorage.setItem("loggedIn", true); // Set the login status
+          window.location.href = "/";
         } else if (loginId === "Management" && password === "234567") {
-          window.location.href = "/"; // Redirect to Management page
+          sessionStorage.setItem("loggedIn", true); // Set the login status
+          window.location.href = "/";
         } else {
           document.getElementById("error").innerText =
             "Invalid Login ID or Password.";
